@@ -1,13 +1,193 @@
 <%- include("./partials/head") %>
-    
-<div class="wrapper">
-    <% for (person of result){ %>
-        <div class="person">
-            <h1><%= person.name %></h1>
-            <h2><%= person.age %></h2>
-        </div>
-    <% }%>
+<%- include("./partials/nav") %>
+
+<div class="form-container">
+    <h1 class="h1submit">Submit text</h1>
+    <form class="publishform">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" for="value"required>
+        <label for="text">Text (max 100 ord):</label>
+        <textarea name="text" id="text" for="value" rows="4" maxlength="500" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+<div class="contentList">
+
 </div>
+    
+<div class="form-container" >
+    <h2 class="h2login">Login</h2>
+    <form class="login_form si">
+        <input class="loginusername" type="text" name="username" placeholder="Username" required>
+        <input class="loginpassord" type="password" name="password" placeholder="Password" required>
+        <input type="button" class="dontusr" value="Don't have a user?">
+        <button class="" type="submit">Login</button>
+
+    </form>
+</div>
+
+<div class="form-container">
+    <h2 class="signupH2">Sign up</h2>
+    <form class="signup_form su">
+        <input class="brknavn" type="text" name="username" placeholder="Username" required>
+        <input class="pssord" type="password" name="password" placeholder="Password" required>
+        <button class="butten" type="submit">Sign up</button>
+
+    </form>
+</div>
+
+<script>
+    const loginButton = document.querySelector('.loginbutt');
+    const loginForm = document.querySelector('.si');
+    const loginH2 = document.querySelector('.h2login');
+    const dontusrButt = document.querySelector('.dontusr');
+    const signupForm = document.querySelector('.su')
+    const signupH2 = document.querySelector('.signupH2');
+    const h1sub = document.querySelector('.h1submit')
+
+    loginForm.hidden = true;
+    loginH2.hidden = true;
+    signupForm.hidden = true;
+    signupH2.hidden = true;
+
+
+
+    loginButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginForm.hidden = false;
+        loginH2.hidden = false;
+        form.hidden = true;
+        h1sub.hidden = true;
+        list.hidden = true;
+
+        console.log('hei');
+    });
+
+    dontusrButt.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginForm.hidden = true;
+        loginH2.hidden = true;
+        signupForm.hidden = false;
+        signupH2.hidden = false;
+
+        console.log('hei');
+    });
+
+/* ----------------------------- */
+
+    const signup_form = document.querySelector('.signup_form')
+
+    signupForm.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        const password = document.querySelector('.pssord');
+        const username = document.querySelector('.brknavn');
+        console.log(username.value, password.value)
+        const url = 'http://localhost:6969/signup'
+        handleSubmit(url, username.value, password.value);
+    })
+
+    loginForm.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        const password = document.querySelector('.loginpassord');
+        const username = document.querySelector('.loginusername');
+        console.log(username.value, password.value)
+        const url = 'http://localhost:6969/login'
+        handleSubmit(url, username.value, password.value);
+    })
+
+    const handleSubmit = async (url, username, password) => {
+        const response = await fetch(url,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                username: username, password
+            })
+        })
+        const json = await response.json()
+        console.log(json)
+    }
+
+/* ---------------------------------- */
+
+    const form = document.querySelector('.publishform')
+
+    const list = document.querySelector('.contentList')
+
+    function refresh(){
+            location.reload(true);
+        }
+
+    form.addEventListener('submit', async(e)=>{
+        e.preventDefault();
+        
+        const title = document.querySelector('#title').value;
+        const content = document.querySelector('#text').value;    
+
+        
+        try{
+            const res = await fetch('http://localhost:6969/add', {
+                method: 'POST',
+                body: JSON.stringify({content, title}),
+                headers: {'Content-type': 'application/json'}
+            });
+            const data = await res.json()
+            console.log(data)
+        }
+        catch (err) {
+            console.log(err)
+        } 
+        finally {
+        refresh();
+        }
+    })
+    async function hei(){ 
+        const response = await fetch('http://localhost:6969/posts') 
+        const posts = await response.json();
+        console.log(posts);
+
+        list.innerHTML = ''; // Clear previous content
+
+        posts.forEach(p => {
+            list.innerHTML +=  `
+                 <div class="post">
+                      <h3>${p.titles}</h3>
+                      <p>${p.contents}</p>
+                      <button onclick=deletes('${p._id}')>Delete</button>
+                 </div>  
+            `
+        });
+    } 
+    hei()
+
+    async function deletes(id){
+            console.log(id)
+            try{
+                const res = await fetch('http://localhost:6969/delete', {
+                    method: 'POST',
+                    body: JSON.stringify({id}),
+                    headers: {'Content-type': 'application/json'}
+                });
+                const data = await res.json()
+                console.log(data)
+                
+            }
+            catch (err) {
+                console.log(err)
+            }
+            finally{
+                refresh()
+            }
+
+        }
+
+
+
+</script>
+
+
+
+
 
 
 <%- include("./partials/footer") %>

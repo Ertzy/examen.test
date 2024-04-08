@@ -1,0 +1,43 @@
+<%- include("./partials/head") %>
+<%- include("./partials/nav") %>
+
+<div class="form-container" >
+    <h2>Login</h2>
+    <form class="login_form">
+        <input class="brknavn" type="text" name="username" placeholder="Username" required>
+        <input class="pssord" type="password" name="password" placeholder="Password" required>
+        <a href="./sign-up" class="signuplink">Don't have a user?</a>
+        <h2 class="errormeld">*Incorrect username or password*</h2>
+        <button class="butten" type="submit">Login</button>
+
+    </form>
+</div>
+
+<script>
+    const login_form = document.querySelector('.login_form');
+
+    login_form.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        const password = document.querySelector('.pssord');
+        const username = document.querySelector('.brknavn');
+        const url = 'http://localhost:6969/login'
+        handleSubmit(url, username.value, password.value);
+    })
+
+    const handleSubmit = async (url, username, password) => {
+        const response = await fetch(url,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                username, password
+            })
+        })
+        const json = await response.json()
+                console.log(json)
+    }
+    
+</script>
+
+<%- include("./partials/footer") %>

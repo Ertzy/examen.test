@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: auto;
+}
+label{
+    display: block;
+}
+
+nav{
+    color: white;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #24252A;
+}
+
+.contentlist{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    max-width: 50%;
+    border: 1px black;
+}
+
+.bitt{
+    padding: 0 35%;
+    font-size: 30px;
+}
+
+a{
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+.signuplink{
+    color: black;
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.errormeld{
+    background-color: lightcoral;
+    color: black;
+    
+}
+
+.form-container{
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    max-width: 50%;
+    padding-top: 8%;
+}
+
+.dontusr{
+    background-color: white;
+    color: black;
+    border: white;
+    cursor: pointer;
+}
+
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    display: block;
+}
+
+button {
+    padding: 10px;
+    background-color: #24252A;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+}
+
+
