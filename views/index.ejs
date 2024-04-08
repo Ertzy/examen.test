@@ -81,7 +81,7 @@
         const password = document.querySelector('.pssord');
         const username = document.querySelector('.brknavn');
         console.log(username.value, password.value)
-        const url = 'http://localhost:6969/signup'
+        const url = 'http://10.12.8.129/signup'
         handleSubmit(url, username.value, password.value);
     })
 
@@ -90,7 +90,7 @@
         const password = document.querySelector('.loginpassord');
         const username = document.querySelector('.loginusername');
         console.log(username.value, password.value)
-        const url = 'http://localhost:6969/login'
+        const url = 'http://10.12.8.129/login'
         handleSubmit(url, username.value, password.value);
     })
 
@@ -126,7 +126,7 @@
 
         
         try{
-            const res = await fetch('http://localhost:6969/add', {
+            const res = await fetch('http://10.12.8.129/add', {
                 method: 'POST',
                 body: JSON.stringify({content, title}),
                 headers: {'Content-type': 'application/json'}
@@ -142,7 +142,7 @@
         }
     })
     async function hei(){ 
-        const response = await fetch('http://localhost:6969/posts') 
+        const response = await fetch('http://10.12.8.129/posts') 
         const posts = await response.json();
         console.log(posts);
 
@@ -163,7 +163,7 @@
     async function deletes(id){
             console.log(id)
             try{
-                const res = await fetch('http://localhost:6969/delete', {
+                const res = await fetch('http://10.12.8.129/delete', {
                     method: 'POST',
                     body: JSON.stringify({id}),
                     headers: {'Content-type': 'application/json'}
