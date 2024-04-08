@@ -151,8 +151,8 @@
         posts.forEach(p => {
             list.innerHTML +=  `
                  <div class="post">
-                      <h3>${p.titles}</h3>
-                      <p>${p.contents}</p>
+                      <h3>${p.title}</h3>
+                      <p>${p.value}</p>
                       <button onclick=deletes('${p._id}')>Delete</button>
                  </div>  
             `

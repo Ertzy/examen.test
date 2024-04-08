@@ -23,7 +23,7 @@ app.get('/sign-up', function(req, res) {
 })
 
 app.listen(3000, ()=>{
-    dbHandler.connectToDb()
+    // dbHandler.connectToDb()
     console.log("Server is running on port 3000")
 })
 
